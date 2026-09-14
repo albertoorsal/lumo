@@ -1,0 +1,23 @@
+{
+  "name": "Lumo POS desktop application",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "api:dev": "pnpm --filter @app/api start:dev",
+    "api:seed": "pnpm --filter @app/api seed",
+    "api:migration:run": "pnpm --filter @app/api migration:run",
+    "desktop:dev": "pnpm --filter @app/desktop dev",
+    "dev": "pnpm --parallel --filter @app/api --filter @app/desktop dev"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.29.2"
+}
