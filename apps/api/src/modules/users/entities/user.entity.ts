@@ -27,10 +27,13 @@ export class User {
   })
   passwordHash: string;
 
+  @Column({ name: 'full_name', type: 'varchar', length: 150, nullable: true })
+  fullName: string | null;
+
   @Column({ name: 'is_active', type: 'boolean', default: true })
   isActive: boolean;
 
-  @Column({ name: 'last_login_at', type: 'timestamptz', nullable: false })
+  @Column({ name: 'last_login_at', type: 'timestamptz', nullable: true })
   lastLoginAt: Date | null;
 
   @ManyToMany(() => Role, (role) => role.users, { cascade: false })

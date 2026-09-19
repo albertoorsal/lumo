@@ -10,9 +10,9 @@ import {
 import { User } from '../../modules/users/entities/user.entity.js';
 
 /**
- * Save SHA-256 refresh token, not the token. If the base was filter
- * The tokens does not reusables. Use SHA-256 and no Argon2 because
- * we need find by index and the token is a random 256 bits
+ * Store the SHA-256 hash of the refresh token, not the token itself. If the
+ * database leaks, the tokens are not reusable. We use SHA-256 instead of
+ * Argon2 because we need to look up by index and the token is a random 256-bit value.
  */
 @Entity('refresh_tokens')
 export class RefreshToken {
@@ -31,7 +31,7 @@ export class RefreshToken {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  /** Groups all string chain to rotations at the same session */
+  /** Groups every rotation chain that belongs to the same session */
   @Index()
   @Column({ name: 'family_id', type: 'uuid' })
   familyId: string;
@@ -39,7 +39,7 @@ export class RefreshToken {
   @Column({ name: 'expires_at', type: 'timestamptz' })
   expiresAt: Date;
 
-  @Column({ name: 'revoked_at', type: 'timestamptz' })
+  @Column({ name: 'revoked_at', type: 'timestamptz', nullable: true })
   revokedAt: Date | null;
 
   @Column({ name: 'replaced_at', type: 'uuid', nullable: true })

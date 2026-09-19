@@ -5,6 +5,10 @@ import { Role } from '../modules/rbac/entities/role.entity.js';
 import { Permission } from '../modules/rbac/entities/permissions.entity.js';
 import { RefreshToken } from '../auth/entities/refresh-token.entity.js';
 
+// Compiled runs (nest start / dist/main.js) load transpiled migrations from
+// dist; the `pnpm typeorm` CLI runs via tsx directly against the TS sources.
+const isCompiled = import.meta.url.includes('/dist/');
+
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -13,7 +17,11 @@ export const dataSourceOptions: DataSourceOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [User, Role, Permission, RefreshToken],
-  migrations: ['src/database/migrations/*.ts'],
+  migrations: [
+    isCompiled
+      ? 'dist/database/migrations/*.js'
+      : 'src/database/migrations/*.ts',
+  ],
   synchronize: false,
   logging:
     process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],

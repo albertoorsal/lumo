@@ -1,2 +1,2 @@
-export * from "./rbac";
-export * from "./auth.contracts";
+export * from "./rbac.js";
+export * from "./auth.contracts.js";

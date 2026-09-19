@@ -20,7 +20,7 @@ export class Role {
   @Column({ type: 'varchar', length: 255, nullable: true })
   description: string | null;
 
-  // the roles must not be delete from UI
+  // system roles must not be deletable from the UI
   @Column({ name: 'is_system', type: 'boolean', default: false })
   isSystem: boolean;
 

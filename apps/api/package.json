@@ -7,15 +7,19 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
+    "prestart:dev": "pnpm --filter @app/shared build",
     "start:dev": "nest start --watch",
+    "prebuild": "pnpm --filter @app/shared build",
     "build": "nest build",
-    "typeorm": "node ./node_modules/typeorm/cli-ts-node-esm.js -d src/database/data-source.ts",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js -d src/database/data-source.ts",
     "migration:generate": "pnpm typeorm migration:generate",
     "migration:run": "pnpm typeorm migration:run",
     "migration:revert": "pnpm typeorm migration:revert",
-    "seed": "ts-node -r tsconfig-paths/register src/database/seeds/run-seed.ts"
+    "preseed": "pnpm --filter @app/shared build",
+    "seed": "tsx src/database/seeds/run-seed.ts"
   },
   "dependencies": {
+    "@app/shared": "workspace:*",
     "@nestjs/common": "^12.0.1",
     "@nestjs/config": "^12.0.0",
     "@nestjs/core": "^12.0.1",
@@ -45,6 +49,8 @@
     "@nestjs/testing": "^12.0.1",
     "@types/express": "^5.0.0",
     "@types/node": "^24.0.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-jwt": "^4.0.1",
     "@types/supertest": "^7.0.0",
     "@vitest/coverage-v8": "^4.1.2",
     "oxlint": "^1.58.0",
@@ -53,6 +59,7 @@
     "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.1.2"

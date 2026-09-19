@@ -1,4 +1,4 @@
-import type { Permission, RoleName } from "./rbac";
+import type { Permission, RoleName } from "./rbac.js";
 
 export interface LoginRequest {
   username: string;

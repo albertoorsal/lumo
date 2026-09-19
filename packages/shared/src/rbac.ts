@@ -10,9 +10,9 @@ export const RoleName = {
 export type RoleName = (typeof RoleName)[keyof typeof RoleName];
 
 /**
- * granular permissios in format `resources:action`
- * A role is a container of permissions; the guards evaluates permisions, not roles
- * excepto in very specific cases.
+ * Granular permissions in the format `resource:action`.
+ * A role is a container of permissions; the guards evaluate permissions, not
+ * roles, except in very specific cases.
  */
 export const Permission = {
   USERS_READ: "users:read",
@@ -20,14 +20,14 @@ export const Permission = {
   USERS_UPDATE: "users:update",
   USERS_DELETE: "users:delete",
   ROLES_READ: "roles:read",
-  ROLES_ASSIGN: "roles:assing",
+  ROLES_ASSIGN: "roles:assign",
   AUDIT_READ: "audit:read",
 } as const;
 
 export type Permission = (typeof Permission)[keyof typeof Permission];
 
 /**
- * MATRIX ROLE -> Permissions. The source of the thurth for seed
+ * ROLE -> Permissions matrix. The source of truth for the seed.
  */
 export const ROLES_PERMISSIONS: Record<RoleName, Permission[]> = {
   SUPER_ADMIN: Object.values(Permission),
@@ -46,6 +46,6 @@ export const PERMISSION_DESCRIPTIONS: Record<Permission, string> = {
   "users:update": "Edit users",
   "users:delete": "Delete users",
   "roles:read": "List and view roles and permissions",
-  "roles:assing": "Assign roles to users",
+  "roles:assign": "Assign roles to users",
   "audit:read": "View the audit log",
 };
