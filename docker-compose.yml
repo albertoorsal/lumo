@@ -12,7 +12,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app -d desktop_rbac"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d lumo_db"]
       interval: 5s
       timeout: 5s
       retries: 10

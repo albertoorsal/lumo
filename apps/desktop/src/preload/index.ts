@@ -1,18 +1,31 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcMain, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { IpcResult, LoginRequest, SessionResult } from '@app/shared'
 
-// Custom APIs for renderer
-const api = {}
+const api = {
+  auth: {
+    login: (credentials: LoginRequest): Promise<IpcResult<SessionResult>> =>
+      ipcRenderer.invoke('auth:login', credentials),
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
+    refresh: (): Promise<IpcResult<SessionResult>> => ipcRenderer.invoke('auth:refresh'),
+
+    logout: (): Promise<IpcResult<null>> => ipcRenderer.invoke('auth:logout'),
+
+    hasSession: (): Promise<IpcResult<boolean>> => ipcRenderer.invoke('auth:has-session')
+  },
+
+  apiUrl: (): string => 'http://localhost:3000/api'
+} as const
+
+export type AppApi = typeof api
+
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
   } catch (error) {
     console.error(error)
+    throw new Error('contextIsolation must be disable')
   }
 } else {
   // @ts-ignore (define in dts)

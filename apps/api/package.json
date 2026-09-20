@@ -9,6 +9,8 @@
   "scripts": {
     "prestart:dev": "pnpm --filter @app/shared build",
     "start:dev": "nest start --watch",
+    "predev": "pnpm --filter @app/shared build",
+    "dev": "nest start --watch",
     "prebuild": "pnpm --filter @app/shared build",
     "build": "nest build",
     "typeorm": "tsx ./node_modules/typeorm/cli.js -d src/database/data-source.ts",
