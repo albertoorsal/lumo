@@ -4,6 +4,7 @@ import { User } from '../modules/users/entities/user.entity.js';
 import { Role } from '../modules/rbac/entities/role.entity.js';
 import { Permission } from '../modules/rbac/entities/permissions.entity.js';
 import { RefreshToken } from '../auth/entities/refresh-token.entity.js';
+import { Company } from '../modules/companies/entities/company.entity.js';
 
 // Compiled runs (nest start / dist/main.js) load transpiled migrations from
 // dist; the `pnpm typeorm` CLI runs via tsx directly against the TS sources.
@@ -16,7 +17,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [User, Role, Permission, RefreshToken],
+  entities: [User, Role, Permission, RefreshToken, Company],
   migrations: [
     isCompiled
       ? 'dist/database/migrations/*.js'

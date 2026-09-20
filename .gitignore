@@ -1,10 +1,39 @@
+# Dependencies
 node_modules/
+.pnpm-store/
+
+# Build output
 dist/
 out/
 build/
 release/
+*.tsbuildinfo
+
+# Env files
 .env
 .env.*
 !.env.example
+
+# Logs
 *.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
 .DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Testing / coverage
+coverage/
+.nyc_output/
+
+# Cache
+.eslintcache
+.turbo/
+.cache/
+
+# Electron / desktop-specific extras not covered by apps/desktop/.gitignore
+*.pem

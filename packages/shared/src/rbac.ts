@@ -22,6 +22,10 @@ export const Permission = {
   ROLES_READ: "roles:read",
   ROLES_ASSIGN: "roles:assign",
   AUDIT_READ: "audit:read",
+  COMPANIES_READ: "companies:read",
+  COMPANIES_CREATE: "companies:create",
+  COMPANIES_UPDATE: "companies:update",
+  COMPANIES_DELETE: "companies:delete",
 } as const;
 
 export type Permission = (typeof Permission)[keyof typeof Permission];
@@ -36,6 +40,10 @@ export const ROLES_PERMISSIONS: Record<RoleName, Permission[]> = {
     Permission.USERS_UPDATE,
     Permission.USERS_DELETE,
     Permission.ROLES_READ,
+    Permission.COMPANIES_READ,
+    Permission.COMPANIES_CREATE,
+    Permission.COMPANIES_UPDATE,
+    Permission.COMPANIES_DELETE,
   ],
   USER: [],
 };
@@ -48,4 +56,8 @@ export const PERMISSION_DESCRIPTIONS: Record<Permission, string> = {
   "roles:read": "List and view roles and permissions",
   "roles:assign": "Assign roles to users",
   "audit:read": "View the audit log",
+  "companies:read": "List and view companies",
+  "companies:create": "Create companies",
+  "companies:update": "Edit companies",
+  "companies:delete": "Delete companies",
 };

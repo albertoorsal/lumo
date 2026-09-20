@@ -11,6 +11,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard.js';
 import { UsersModule } from './modules/users/users.module.js';
 import { dataSourceOptions } from './database/data-source.js';
+import { CompanyModule } from './modules/companies/company.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -21,6 +22,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     AuthModule,
     UsersModule,
+    CompanyModule,
     // Distributed tracing, auto-correlated logs, request/job metrics, error
     // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
     // ObserveModule.forRoot({
